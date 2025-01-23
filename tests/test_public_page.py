@@ -8,7 +8,7 @@ from utils.utils import Utils
 @allure.feature('Pruebas a SSIOC')
 @allure.story('Validación de inicio de Sesion') 
 @allure.tag('prioridad:alta', 'tipo:funcional')
-def test_login(setup):
+def test_login(setup,elemento):
     """
     Pruebas a SSIOC
     http://10.35.16.10:8086
