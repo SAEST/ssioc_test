@@ -21,7 +21,7 @@ def setup():
     driver.maximize_window()
 
     # URL de la página que deseas validar
-    url = 'http://localhost:4200/login'
+    url = 'http://10.35.16.10:8086'
     driver.get(url)
 
     # Espera a que la página cargue completamente

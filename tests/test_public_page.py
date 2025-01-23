@@ -11,7 +11,7 @@ from utils.utils import Utils
 def test_login(setup):
     """
     Pruebas a SSIOC
-    http://localhost:4200/home
+    http://10.35.16.10:8086
     """
     try:
         driver = setup
