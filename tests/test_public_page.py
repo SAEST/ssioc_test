@@ -31,6 +31,13 @@ def test_login(setup):
             
     except NoSuchElementException:
         # Manejar la excepción si el elemento no se encuentra
-        error_message = f"Elemento no encontrado:"
+        error_message = f"Elemento no encontrado: {elemento}"
         allure.attach(f"Error: {error_message}", name="NoSuchElementException", attachment_type=allure.attachment_type.TEXT)
+        with allure.step("Screenshot"):
+            with open(file_path, "rb") as image_file:
+                allure.attach(
+                    image_file.read(),
+                    name="Captura de pantalla",
+                    attachment_type=allure.attachment_type.PNG
+                    ) 
         pytest.fail(error_message)
