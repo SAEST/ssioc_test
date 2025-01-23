@@ -2,6 +2,8 @@ import pytest
 import allure
 import time
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from pages.public_page import PublicPage
 from utils.utils import Utils
@@ -17,6 +19,9 @@ def test_login(setup):
     try:
         driver = setup
         public_page = PublicPage(driver)
+        time.sleep(15)
+        element = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "Usuario")))
+        file_path = public_page.highlight_and_capture_element(element)  
         driver.find_element(By.ID, "Usuario").send_keys("eric.ruiz")
         driver.find_element(By.ID, "password").send_keys("password")
         driver.find_element(By.CSS_SELECTOR, ".btn-primary").click()
