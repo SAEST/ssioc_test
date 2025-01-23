@@ -8,7 +8,7 @@ from utils.utils import Utils
 @allure.feature('Pruebas a SSIOC')
 @allure.story('Validación de inicio de Sesion') 
 @allure.tag('prioridad:alta', 'tipo:funcional')
-def test_login(setup,elemento):
+def test_login(setup):
     """
     Pruebas a SSIOC
     http://10.35.16.10:8086
@@ -31,7 +31,7 @@ def test_login(setup,elemento):
             
     except NoSuchElementException:
         # Manejar la excepción si el elemento no se encuentra
-        error_message = f"Elemento no encontrado: {elemento}"
+        error_message = f"Elemento no encontrado:"
         allure.attach(f"Error: {error_message}", name="NoSuchElementException", attachment_type=allure.attachment_type.TEXT)
         with allure.step("Screenshot"):
             with open(file_path, "rb") as image_file:
