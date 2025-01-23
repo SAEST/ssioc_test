@@ -21,18 +21,19 @@ def test_login(setup):
         public_page = PublicPage(driver)
         time.sleep(15)
         element = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "Usuario")))
-        file_path = public_page.highlight_and_capture_element(element)  
+        file_path3 = public_page.highlight_and_capture_element(element)  
         driver.find_element(By.ID, "Usuario").send_keys("eric.ruiz")
         driver.find_element(By.ID, "password").send_keys("password")
         driver.find_element(By.CSS_SELECTOR, ".btn-primary").click()
-
-        elemento = driver.find_element(By.CSS_SELECTOR, ".timer")
+        time.sleep(15)
+        elemento = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".timer")))
         file_path = public_page.highlight_and_capture_element(elemento)  
         driver.implicitly_wait(100)
         time.sleep(300)
         elemento2 = driver.find_element(By.XPATH, "//div[6]/span")
         file_path2 = public_page.highlight_and_capture_element(elemento2) 
         driver.find_element(By.XPATH, "//div[6]/span").click()        
+        Utils.attach_allure_results(file_path3)
         Utils.attach_allure_results(file_path)
         Utils.attach_allure_results(file_path2)
             
@@ -40,11 +41,11 @@ def test_login(setup):
         # Manejar la excepción si el elemento no se encuentra
         error_message = f"Elemento no encontrado:"
         allure.attach(f"Error: {error_message}", name="NoSuchElementException", attachment_type=allure.attachment_type.TEXT)
-        with allure.step("Screenshot"):
+        with allure.step("Evidencia de error"):
             with open(file_path, "rb") as image_file:
                 allure.attach(
                     image_file.read(),
-                    name="Captura de pantalla",
+                    name="Captura de error",
                     attachment_type=allure.attachment_type.PNG
                     ) 
         pytest.fail(error_message)

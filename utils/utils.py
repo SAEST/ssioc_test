@@ -11,7 +11,7 @@ class Utils:
         """
         Adjunta resultados a Allure
         """
-        with allure.step("Screenshot"):
+        with allure.step("Captura de pantallas"):
             with open(file_path, "rb") as image_file:
                 allure.attach(
                     image_file.read(),
