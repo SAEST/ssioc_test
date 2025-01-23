@@ -26,7 +26,7 @@ def test_login(setup):
         driver.find_element(By.ID, "Usuario").send_keys("eric.ruiz")
         driver.find_element(By.ID, "password").send_keys("password")
         driver.find_element(By.CSS_SELECTOR, ".btn-primary").click()
-        time.sleep(15)
+        time.sleep(100)
         elemento = driver.find_element(By.CSS_SELECTOR, ".timer")
         file_path = public_page.highlight_and_capture_element(elemento)  
         Utils.attach_allure_results(file_path)
