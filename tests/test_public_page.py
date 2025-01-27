@@ -25,6 +25,7 @@ def test_login(setup):
         file_path3 = public_page.highlight_and_capture_element(elemento) 
         validacion = "Se valida pagina inicio de sesión y sus elementos para iniciar sesion."
         Utils.attach_allure_results(validacion, file_path3) 
+        allure.attach(driver.get_screenshot_as_png(), name="01 - Pagin de Login", attachment_type=allure.attachment_type.PNG)  
         driver.find_element(By.ID, "Usuario").send_keys("eric.ruiz")
         driver.find_element(By.ID, "password").send_keys("password")
         driver.find_element(By.CSS_SELECTOR, ".btn-primary").click()
@@ -33,6 +34,7 @@ def test_login(setup):
         file_path = public_page.highlight_and_capture_element(elemento)  
         validacion = "Se localizó el elemento de temporizador de tiempo de sesion."
         Utils.attach_allure_results(validacion, file_path)
+        allure.attach(driver.get_screenshot_as_png(), name="02 - Pagina de inicio", attachment_type=allure.attachment_type.PNG)  
         driver.implicitly_wait(100)
         time.sleep(300)
         print("Se espera 5 minutos para cerrar sesión")
@@ -40,7 +42,8 @@ def test_login(setup):
         file_path2 = public_page.highlight_and_capture_element(elemento) 
         validacion = "Se localizó el elemento para cerrar sesión."
         Utils.attach_allure_results(validacion, file_path2)
-        driver.find_element(By.XPATH, "//div[6]/span").click()    
+        driver.find_element(By.XPATH, "//div[6]/span").click()  
+        allure.attach(driver.get_screenshot_as_png(), name="03 - Cierre de sesión", attachment_type=allure.attachment_type.PNG)  
         print("Se valida cierre de sesión correcto")   
          
             
