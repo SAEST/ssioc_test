@@ -10,6 +10,7 @@ from utils.utils import Utils
 
 @allure.feature('Pruebas a SSIOC')
 @allure.story('Validación de inicio de Sesion') 
+@allure.title('Validación de inicio de Sesion') 
 @allure.tag('prioridad:alta', 'tipo:funcional')
 def test_login(setup):
     """
@@ -20,25 +21,31 @@ def test_login(setup):
         driver = setup
         public_page = PublicPage(driver)
         time.sleep(15)
-        element = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "Usuario")))
-        file_path3 = public_page.highlight_and_capture_element(element) 
-        Utils.attach_allure_results(file_path3) 
+        elemento = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "Usuario")))
+        file_path3 = public_page.highlight_and_capture_element(elemento) 
+        validacion = "Se valida pagina inicio de sesión y sus elementos para iniciar sesion."
+        Utils.attach_allure_results(validacion, file_path3) 
         driver.find_element(By.ID, "Usuario").send_keys("eric.ruiz")
         driver.find_element(By.ID, "password").send_keys("password")
         driver.find_element(By.CSS_SELECTOR, ".btn-primary").click()
         driver.implicitly_wait(100)
         elemento = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".timer")))
         file_path = public_page.highlight_and_capture_element(elemento)  
-        Utils.attach_allure_results(file_path)
+        validacion = "Se localizó el elemento de temporizador de tiempo de sesion."
+        Utils.attach_allure_results(validacion, file_path)
         driver.implicitly_wait(100)
         time.sleep(300)
-        elemento2 = driver.find_element(By.XPATH, "//div[6]/span")
-        file_path2 = public_page.highlight_and_capture_element(elemento2) 
-        Utils.attach_allure_results(file_path2)
-        driver.find_element(By.XPATH, "//div[6]/span").click()        
+        print("Se espera 5 minutos para cerrar sesión")
+        elemento = driver.find_element(By.XPATH, "//div[6]/span")
+        file_path2 = public_page.highlight_and_capture_element(elemento) 
+        validacion = "Se localizó el elemento para cerrar sesión."
+        Utils.attach_allure_results(validacion, file_path2)
+        driver.find_element(By.XPATH, "//div[6]/span").click()    
+        print("Se valida cierre de sesión correcto")   
+         
             
     except NoSuchElementException:
-        error_message = f"Elemento no encontrado:"
+        error_message = f"Elemento no encontrado: {elemento}"
         allure.attach(f"Error: {error_message}", name="NoSuchElementException", attachment_type=allure.attachment_type.TEXT)
 
         # Capture screenshot on error using driver.get_screenshot_as_png()
