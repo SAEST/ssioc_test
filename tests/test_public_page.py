@@ -13,7 +13,7 @@ from utils.utils import Utils
 @allure.tag('prioridad:alta', 'tipo:funcional')
 def test_login(setup):
     """
-    Pruebas a SSIOC
+    Pruebas a SSIOC para inicio de sesion con un tiempo de espera de 5 minutos y posteriormente cerrar sesion.
     http://10.35.16.10:8086
     """
     try:
@@ -22,19 +22,19 @@ def test_login(setup):
         time.sleep(15)
         element = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "Usuario")))
         file_path3 = public_page.highlight_and_capture_element(element) 
-        Utils.attach_allure_results(file_path3) 
+        Utils.attach_allure_results(element, file_path3) 
         driver.find_element(By.ID, "Usuario").send_keys("eric.ruiz")
         driver.find_element(By.ID, "password").send_keys("password")
         driver.find_element(By.CSS_SELECTOR, ".btn-primary").click()
         driver.implicitly_wait(100)
         elemento = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".timer")))
         file_path = public_page.highlight_and_capture_element(elemento)  
-        Utils.attach_allure_results(file_path)
+        Utils.attach_allure_results(elemento, file_path)
         driver.implicitly_wait(100)
         time.sleep(300)
         elemento2 = driver.find_element(By.XPATH, "//div[6]/span")
         file_path2 = public_page.highlight_and_capture_element(elemento2) 
-        Utils.attach_allure_results(file_path2)
+        Utils.attach_allure_results(elemento2, file_path2)
         driver.find_element(By.XPATH, "//div[6]/span").click()        
             
     except NoSuchElementException:
