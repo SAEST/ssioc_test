@@ -31,6 +31,21 @@ class Utils:
             current_date_and_time = dt.datetime.now()
             print(f"Modal no ha sido encontrado {current_date_and_time}")
         return None
+    
+    def modal_sesion_existente(driver):
+
+        try:
+            modal = WebDriverWait(driver, 10).until(
+                EC.visibility_of_element_located((By.XPATH, "/html/body/app-root/div/div/app-login/app-loginmodal/app-basemodal/div/div"))
+            )
+            # Capturar pantalla del modal
+            allure.attach(driver.get_screenshot_as_png(), name="Modal encontrado", attachment_type=allure.attachment_type.PNG)
+            print(f"Modal encontrado a las {dt.datetime.now()}")
+            return modal
+        except:
+            pass
+        time.sleep(5)
+        return None
 
     def attach_allure_results(validacion, file_path):
         """
