@@ -15,7 +15,7 @@ class Utils:
         current_date_and_time = dt.datetime.now()
         print(f"La prueba inició a las {current_date_and_time}")
         start_time = time.time()
-        end_time = start_time + 28 * 60  # 30 minutos en segundos
+        end_time = start_time + 30 * 60  # 30 minutos en segundos
         while time.time() < end_time:
             try:
                 modal = WebDriverWait(driver, 10).until(
